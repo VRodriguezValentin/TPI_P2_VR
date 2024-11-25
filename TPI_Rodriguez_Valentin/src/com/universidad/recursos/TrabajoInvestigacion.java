@@ -1,11 +1,12 @@
 package com.universidad.recursos;
 
 import com.universidad.excepciones.InvalidListType;
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TrabajoInvestigacion extends RecursoAcademico{
+public class TrabajoInvestigacion extends RecursoAcademico implements Serializable{
     protected List<String> autores;
     private String lineaInvestigacion;
 

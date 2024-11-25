@@ -1,8 +1,9 @@
 package com.universidad.recursos;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 
-public abstract class RecursoAcademico {
+public abstract class RecursoAcademico implements Serializable{
     private final String identificador;
     private String titulo;
     private LocalDate fechaCreacion;

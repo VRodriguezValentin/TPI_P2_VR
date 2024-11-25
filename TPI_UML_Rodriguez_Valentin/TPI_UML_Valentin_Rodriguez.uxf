@@ -1,0 +1,88 @@
+<diagram program="umletino" version="15.1"><zoom_level>9</zoom_level><element><id>UMLClass</id><coordinates><x>477</x><y>855</y><w>315</w><h>288</h></coordinates><panel_attributes>_RecursoAcademico_
+--
+-identificador: String
+-titulo: String
+-fechaCreacion: LocalDate 
+-autor: String 
+-categoria: String
+--
++RecursoAcademico(String identificador, String titulo, 
+LocalDate fechaCreacion, String autor): RecursoAcademico
++getIdentificador(): String
++getTitulo(): String
++setTitulo(String titulo): void
++getFechaCreacion(): LocalDate
++setFechaCreacion(LocalDate fechaCreacion): void
++getAutor(): String
++setAutor(String autor): void
++getCategoria(): String
++setCategoria(String categoria): void
++calcularRelevancia(): double
++mostrarDetalles(): void
++isNull(String valor): String</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>513</x><y>558</y><w>252</w><h>171</h></coordinates><panel_attributes>_Libro_
+--
+-numeroPaginas: int
+-editorial: String
+--
++Libro(String identificador, String titulo, 
+LocalDate fechaCreacion, String autor, 
+int numeroPaginas, String editorial): Libro
++getNumeroPaginas(): int
++setNumeroPaginas(int numeroPaginas): void
++getEditorial(): String
++setEditorial(String editorial): void
++esLibroDigital(): boolean
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>621</x><y>720</y><w>27</w><h>153</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes><additional_attributes>10;150;10;10</additional_attributes></element><element><id>UMLClass</id><coordinates><x>801</x><y>558</y><w>279</w><h>171</h></coordinates><panel_attributes>_Articulo_
+--
+-palabrasClave: List&lt;String&gt;
+-revista: String
+--
++Articulo(String identificador, String titulo,
+LocalDate fechaCreacion, String autor, 
+String revista): Articulo
++getPalabrasClave(): List&lt;String&gt;
++setPalabrasClave(List&lt;String&gt; palabrasClave): void
++getRevista(): String
++setRevista(String revista): void
++contarPalabrasClave(): int</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>180</x><y>558</y><w>297</w><h>171</h></coordinates><panel_attributes>_TrabajoInvestigacion_
+--
+-autores: List&lt;String&gt;
+-lineaInvestigacion: String
+--
++TrabajoInvestigacion(String identificador, String titulo, 
+LocalDate fechaCreacion, String autor, 
+String lineaInvestigacion): TrabajoInvestigacion
++getAutores(): List&lt;String&gt;
++setAutores(List&lt;String&gt; autores): void
++getLineaInvestigacion():String
++setLineaInvestigacion(String lineaInvestigacion): void
++tieneFinanciamiento(): boolean</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>621</x><y>720</y><w>351</w><h>90</h></coordinates><panel_attributes>lt=-</panel_attributes><additional_attributes>370;10;370;80;10;80</additional_attributes></element><element><id>Relation</id><coordinates><x>306</x><y>720</y><w>342</w><h>90</h></coordinates><panel_attributes>lt=-</panel_attributes><additional_attributes>10;10;10;80;360;80</additional_attributes></element><element><id>UMLInterface</id><coordinates><x>90</x><y>108</y><w>360</w><h>108</h></coordinates><panel_attributes>_&lt;&lt;Clasificable&gt;&gt;_
+--
+obtenerCategoriasClasificacion(RecursoAcademico recurso): String[]
+asignarCategoria(RecursoAcademico recurso, String categoria): void
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLInterface</id><coordinates><x>810</x><y>108</y><w>414</w><h>108</h></coordinates><panel_attributes>_&lt;&lt;Evaluable&gt;&gt;_
+--
+obtenerPuntaje(RecursoAcademico recurso, double evaluacionNota): double
+realizarEvaluacion(Evaluador evaluador, RecursoAcademico recurso): void
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>405</x><y>306</y><w>477</w><h>153</h></coordinates><panel_attributes>_GestorRecursos_
+--
+-recursos: List&lt;RecursoAcademico&gt;
+-categorias: String[]
+--
++filtrarRecurso(RecursoAcademico recurso, FiltroRecurso filtro): boolean
++agregarRecurso(RecursoAcademico recurso): void
++removerRecurso(RecursoAcademico recurso): void
++guardarRecursos(String rutaArchivo): void
++cargarRecursos(String rutaArchivo): void
++ordenarRecursos(Comparator&lt;RecursoAcademico&gt; comparador): List&lt;RecursoAcademico&gt;
++mostrarRecursos(): void</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>1008</x><y>315</y><w>171</w><h>99</h></coordinates><panel_attributes>&lt;&lt;Evaluador&gt;&gt;
+--
+ExpertoLibros
+ExpertoAriculos
+ExpertoProyectosInvestigacion
+ExpertoLiteriario
+Aprendiz</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>306</x><y>486</y><w>342</w><h>90</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes><additional_attributes>10;80;10;10;360;10</additional_attributes></element><element><id>Relation</id><coordinates><x>621</x><y>486</y><w>333</w><h>90</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes><additional_attributes>350;80;350;10;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>621</x><y>198</y><w>27</w><h>126</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;.</panel_attributes><additional_attributes>10;10;10;120</additional_attributes></element><element><id>Relation</id><coordinates><x>261</x><y>198</y><w>387</w><h>81</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;.</panel_attributes><additional_attributes>10;10;10;70;410;70</additional_attributes></element><element><id>Relation</id><coordinates><x>621</x><y>198</y><w>414</w><h>81</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;.</panel_attributes><additional_attributes>440;10;440;70;10;70</additional_attributes></element><element><id>Relation</id><coordinates><x>873</x><y>351</y><w>153</w><h>27</h></coordinates><panel_attributes>lt=&lt;..</panel_attributes><additional_attributes>150;10;10;10</additional_attributes></element><element><id>UMLInterface</id><coordinates><x>504</x><y>108</y><w>252</w><h>108</h></coordinates><panel_attributes>_&lt;&lt;FiltroRecurso&gt;&gt;_
+--
+@FunctionalInterface
+evaluar(RecursoAcademico recurso): boolean
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>630</x><y>450</y><w>27</w><h>126</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes><additional_attributes>10;120;10;10</additional_attributes></element></diagram>

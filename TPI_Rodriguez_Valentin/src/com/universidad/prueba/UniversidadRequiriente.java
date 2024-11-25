@@ -20,8 +20,9 @@ public class UniversidadRequiriente {
             
             //Libro Test
             System.out.println("[==============]Libro[==============]\n");
-            Libro libro1 = new Libro("L001", "El Principito", hoy, "Carlos", 120, "Santillana");
-            //Libro libro2 = new Libro("L002", "El Libro Falso", hoy, "Felipe", 0, "Firulete");//(Descomentar para lanzar excepcion)
+            Libro libro1 = new Libro("L001", "Analisis Matematico Avanzado", hoy, "Carlos", 120, "Santillana");
+            Libro libro2 = new Libro("L002", "El Nihilismo", hoy, "Felipe", 500, "Editorial X");
+            //Libro libro3 = new Libro("L003", "El Libro Falso", hoy, "Pepe", 0, "Firulete");//(Descomentar para lanzar excepcion)
             
             System.out.println("Es un Libro Digital?");
             // Caso 1: No es Libro digital
@@ -43,7 +44,7 @@ public class UniversidadRequiriente {
             
             //Articulo Test
             System.out.println("\n\n[==============]Articulo[==============]\n");
-            Articulo articulo1 = new Articulo("A001", "Avances Tecnologicos", hoy, "Felipe", "Paparazzi");
+            Articulo articulo1 = new Articulo("A001", "Avances Tecnologicos", hoy, "Andres", "Paparazzi");
             
             //articulo1.setPalabrasClave(null); //(Descomentar para lanzar excepcion)
             
@@ -117,6 +118,8 @@ public class UniversidadRequiriente {
             
             //Se instancia un filtro por tipo de recurso
             FiltroRecurso filtro1 = recurso -> recurso instanceof Libro;
+            
+            System.out.println("Filtrar por Recurso de tipo Libro:");
             //Caso 1: Es un Libro
             System.out.println("\nCaso 1 - Es un Libro: " + gestor1.filtrarRecurso(libro1, filtro1)); //true
             //Caso 2: No es un Libro, es un articulo
@@ -124,6 +127,8 @@ public class UniversidadRequiriente {
             
             //Se instancia un filtro por tipo de categoria
             FiltroRecurso filtro2 = recurso -> "Tecnologico".equals(recurso.getCategoria());
+            
+            System.out.println("Filtrar por categoria -> 'Tecnologico':");
             //Caso 1: Categoria invalida
             System.out.println("Caso 1 - Categoria invalida: " + gestor1.filtrarRecurso(articulo1, filtro2)); //false
             //Caso 2: Categoria valida
@@ -131,14 +136,17 @@ public class UniversidadRequiriente {
             System.out.println("Caso 2 - Categoria valida: " + gestor1.filtrarRecurso(articulo1, filtro2) + "\n"); //true
             
             
-            //Se llena la lista de tipo RecursosAcademicos
-            gestor1.agregarRecurso(libro1);
-            gestor1.agregarRecurso(articulo1);
-            gestor1.agregarRecurso(trabajo1);
-            //gestor1.agregarRecurso(libro1); //(Descomentar para lanzar excepcion)
+            System.out.println("Se agrega y se elimina un Recurso dela lista:");
+            gestor1.agregarRecurso(libro2);
+            gestor1.removerRecurso(libro2);
+            System.out.println("Se carga el archivo que contiene la lista de Recursos: ");
+            gestor1.cargarRecursos("recursos.ser");
+            //gestor1.agregarRecurso(libro2); //(Descomentar para lanzar excepcion)
+            //gestor1.removerRecurso(libro2); //(Descomentar para lanzar excepcion)
+            
             
             //Ordenar Lista de Recursos por autor (A-Z)
-            System.out.println("Ordenar Lista de Recursos por autor (A-Z):\n");
+            System.out.println("\nOrdenar Lista de Recursos por autor (A-Z):\n");
             System.out.println(gestor1.ordenarRecursos(Comparator.comparing(RecursoAcademico::getAutor)));
             
             //Ordenar Lista de Recursos por autor (Mas viejo - Mas actual)
@@ -162,8 +170,11 @@ public class UniversidadRequiriente {
             //gestor1.realizarEvaluacion(Evaluador.Aprendiz, libro1);
             
             
-            System.out.println("\nSe genera un informe de los Recursos Academicos en la lista:");
+            System.out.println("\nSe guarda la lista de recursos y se genera un informe de los Recursos Academicos en la lista:");
+            gestor1.guardarRecursos("recursos.ser");
             gestor1.mostrarRecursos();
+            
+            
             
             
         } catch(CategoriaInvalidaException | InvalidListType | InvalidNumeroPaginas | 
@@ -173,7 +184,5 @@ public class UniversidadRequiriente {
         } catch(Exception e){
             System.err.println("ERROR GENERAL - " + e);
         }
-        
-
     }
 }

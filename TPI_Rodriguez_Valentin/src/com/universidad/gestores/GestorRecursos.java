@@ -6,6 +6,10 @@ import com.universidad.excepciones.LimiteRecursosException;
 import com.universidad.excepciones.RecursoNoEncontradoException;
 import com.universidad.interfaces.*;
 import com.universidad.recursos.*;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
@@ -113,16 +117,56 @@ public class GestorRecursos implements Clasificable, Evaluable{
     
     
     
-   public void agregarRecurso(RecursoAcademico recurso) throws LimiteRecursosException {
-       if (recursos.size() >= 3){
-           throw new LimiteRecursosException("La lista de recursos esta llena");
-       } else{
-           recursos.add(recurso);
-       }
+    public void agregarRecurso(RecursoAcademico recurso) throws LimiteRecursosException {
+        if (recursos.size() >= 3){
+            throw new LimiteRecursosException("La lista de recursos esta llena");
+           
+        } else{
+            recursos.add(recurso);
+            System.out.println("Recurso '" + recurso.getTitulo() + "' agregado correctamente");
+        }
     }
+   
+   
+   
+    public void removerRecurso(RecursoAcademico recurso) throws RecursoNoEncontradoException {
+        if (!recursos.contains(recurso)) {
+            throw new RecursoNoEncontradoException("El recurso no se encuentra en la lista de recursos");
+            
+        } else{
+            recursos.remove(recurso);
+            System.out.println("Recurso '" + recurso.getTitulo() + "' eliminado correctamente");
+            
+        }
+    }
+   
+   
+    public void guardarRecursos(String rutaArchivo) {
+        try (FileOutputStream fileOut = new FileOutputStream(rutaArchivo);
+            ObjectOutputStream out = new ObjectOutputStream(fileOut)){
+            out.writeObject(recursos);
+            System.out.println("Recursos guardados correctamente en " + rutaArchivo);
+            
+        } catch (Exception e) {
+            System.err.println("Problema detectado al guardar los recursos");
+        }
+    }
+   
+   
+   
+    public void cargarRecursos(String rutaArchivo) {
+        try (FileInputStream fileIn = new FileInputStream(rutaArchivo);
+            ObjectInputStream in = new ObjectInputStream(fileIn)){
+            recursos = (List<RecursoAcademico>) in.readObject();
+            System.out.println("Recursos cargados correctamente en " + rutaArchivo);
+        
+        } catch (Exception e) {
+            System.err.println("Problema detectado al cargar los recursos"); 
+        }
+    }
+
     
  
-   
     public List<RecursoAcademico> ordenarRecursos(Comparator<RecursoAcademico> comparador) {
         
         return recursos.stream().sorted(comparador).toList();

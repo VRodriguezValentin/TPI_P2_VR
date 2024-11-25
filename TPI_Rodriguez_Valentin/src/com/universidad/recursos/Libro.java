@@ -1,10 +1,11 @@
 package com.universidad.recursos;
 
 import com.universidad.excepciones.InvalidNumeroPaginas;
+import java.io.Serializable;
 import java.time.LocalDate;
 
 
-public class Libro extends RecursoAcademico{
+public class Libro extends RecursoAcademico implements Serializable{
     private int numeroPaginas;
     private String editorial;
 
